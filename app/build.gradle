@@ -1,0 +1,107 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.photo_app"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /*Kotlin Support*/
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$CoroutinesCoreVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$CoroutinesCoreVersion"
+
+    /*Android Support*/
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacy"
+    //noinspection GradleCompatible
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.cardview:cardview:$legacy"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:runner:$runnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+
+    /*Android ViewModel*/
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleversion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleversion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycleversion"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleversion"
+    annotationProcessor "androidx.databinding:databinding-compiler:$databindingCompilerVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$uiKtxVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$uiKtxVersion"
+    implementation "androidx.navigation:navigation-fragment:$uiKtxVersion"
+    implementation "androidx.navigation:navigation-ui:$uiKtxVersion"
+
+    /*RxJava - RxAndroid*/
+//    implementation "io.reactivex:rxandroid:$rxAndroidVersion"
+//    implementation "io.reactivex:rxjava:$rxJavaVersion"
+//    implementation "com.artemzin.rxjava:proguard-rules:$rxRulesVersion"
+//    implementation "io.reactivex:rxjava-math:$rxRulesMath"
+
+    /*Retrofit*/
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitConverterVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpLoggingVersion"
+
+    /*Dagger 2*/
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerCompileVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerSupportVersions"
+    kapt "com.google.dagger:dagger-android-processor:$daggerProcessorVersion"
+
+
+    /*Multidex*/
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
+    /*Glide*/
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glideOkHttpVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+}
