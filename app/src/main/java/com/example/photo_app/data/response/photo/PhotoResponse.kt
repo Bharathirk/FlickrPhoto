@@ -52,10 +52,10 @@ data class ItemsItem(
 
 	@field:SerializedName("tags")
 	val tags: String? = null
-)
+):Serializable
 
 data class Media(
 
 	@field:SerializedName("m")
 	val M: String? = null
-)
+):Serializable

@@ -14,7 +14,7 @@ class PhotoViewModel @Inject constructor() : BaseViewModel<MainNavigator>() {
     fun getPhoto(): MutableLiveData<AppResponse<Any>> {
         val responseBody = MutableLiveData<AppResponse<Any>>()
     viewModelScope.launch(Dispatchers.IO){
-        val response = api.getPhotoList("json","dogs","1")
+        val response = api.getPhotoList("json","cats","1")
         responseBody.postValue(AppResponse.success(response))
     }
 

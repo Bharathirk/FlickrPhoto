@@ -13,6 +13,7 @@ import com.example.photo_app.data.response.photo.PhotoResponse
 import com.example.photo_app.data.viewmodels.base.BaseViewModel
 import com.example.photo_app.data.viewmodels.photo.PhotoViewModel
 import com.example.photo_app.databinding.ActivityMainBinding
+import com.example.photo_app.ui.detail.PhotoDetailActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -89,6 +90,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
         }
     }
     override fun onItemViewClick(photoResponseItem: ItemsItem) {
-
+        PhotoDetailActivity.launchActivity(this,photoResponseItem)
     }
 }

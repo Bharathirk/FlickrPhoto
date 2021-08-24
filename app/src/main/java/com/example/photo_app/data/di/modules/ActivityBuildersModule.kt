@@ -1,5 +1,6 @@
 package com.example.photo_app.data.di.modules
 
+import com.example.photo_app.ui.detail.PhotoDetailActivity
 import com.example.photo_app.ui.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -10,5 +11,6 @@ interface ActivityBuildersModule {
     @ContributesAndroidInjector
     fun contributeSplashActivity(): MainActivity
 
-
+    @ContributesAndroidInjector
+    fun contributeDeatailActivity(): PhotoDetailActivity
 }
