@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PhotoViewModel @Inject constructor() : BaseViewModel<MainNavigator>() {
-
+    //CallApiFunction
     fun getPhoto(): MutableLiveData<AppResponse<Any>> {
         val responseBody = MutableLiveData<AppResponse<Any>>()
     viewModelScope.launch(Dispatchers.IO){
-        val response = api.getPexelList("json","dogs","1")
+        val response = api.getPhotoList("json","dogs","1")
         responseBody.postValue(AppResponse.success(response))
     }
 

@@ -5,5 +5,5 @@ import retrofit2.http.*
 
 interface AppApi {
     @GET(ApiConstants.API_COURSE)
-    suspend fun getPexelList(@Query("format")searchquery:String,@Query("tags")page:String,@Query("nojsoncallback")jsonCallBack:String): PhotoResponse
+    suspend fun getPhotoList(@Query("format")searchquery:String,@Query("tags")page:String,@Query("nojsoncallback")jsonCallBack:String): PhotoResponse
 }

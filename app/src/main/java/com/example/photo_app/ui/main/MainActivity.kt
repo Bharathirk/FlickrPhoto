@@ -1,6 +1,4 @@
 package com.example.photo_app.ui.main
-
-
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -50,18 +48,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
         edtSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
-
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
-
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                filterPhotograph(p0.toString())
             }
-
         })
-
     }
-
+    //getApiList
     private fun getPhotoImages() {
         photoViewModel!!.getPhoto().observe(this, { response ->
             if (response?.data != null) {
@@ -76,7 +71,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
             }
         })
     }
-
+    //SearchAutorName
+    private fun filterPhotograph(skey: String) {
+        val filterList = ArrayList<ItemsItem>()
+        for (entity in PhotoResponseList){
+            if (entity.author!!.contains(skey,true)){
+                filterList.add(entity)
+            }
+        }
+        photoAdapter!!.setCourseAdapter(filterList)
+    }
+    //SetAdapterValue
     private fun setView(photoResponseItem: List<ItemsItem>) {
         if (photoResponseItem != null && photoResponseItem.size > 0) {
             activityMainBinding!!.executePendingBindings()

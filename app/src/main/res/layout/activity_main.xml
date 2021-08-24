@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:ems="10"
-            android:hint="Search PhotographerName"
+            android:hint="SearchAuthorName"
             android:inputType="textPersonName"
             android:padding="5dp"
             android:text=""
