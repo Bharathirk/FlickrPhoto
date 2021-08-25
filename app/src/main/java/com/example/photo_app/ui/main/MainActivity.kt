@@ -16,6 +16,8 @@ import com.example.photo_app.databinding.ActivityMainBinding
 import com.example.photo_app.ui.detail.PhotoDetailActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAdapter.ClickManager  {
     private var activityMainBinding: ActivityMainBinding? = null
@@ -46,16 +48,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
         activityMainBinding?.photoAdapter = photoAdapter
         getPhotoImages()
 
-        edtSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            @RequiresApi(Build.VERSION_CODES.N)
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                filterTag(p0.toString())
-            }
-        })
+        btn_search.setOnClickListener {
+            var kk=edtSearch.text.toString()
+            filterTag(kk)
+//            if (btn_search.text!=""){
+//                filterTag(btn_search.text.toString())
+//            }
+        }
+//        edtSearch.addTextChangedListener(object : TextWatcher {
+//            override fun afterTextChanged(p0: Editable?) {
+////                filterTag(p0.toString())
+//            }
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                filterTag(p0.toString())
+//            }
+//            @RequiresApi(Build.VERSION_CODES.N)
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+////                filterTag(p0.toString())
+//            }
+//        })
     }
     //getApiList
     private fun getPhotoImages() {
@@ -64,6 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
                 val photoResponse = response.data as PhotoResponse
                 if (photoResponse.items!!.size>0){
                     PhotoResponseList.addAll(photoResponse.items as List<ItemsItem>)
+                    PhotoResponseList.sortedWith(compareBy<ItemsItem>({ it.dateTaken })).reversed()
                     setView(PhotoResponseList)
                 }
 
@@ -80,6 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
                 val photoResponse = response.data as PhotoResponse
                 if (photoResponse.items!!.size>0){
                     PhotoResponseList.addAll(photoResponse.items as List<ItemsItem>)
+                    PhotoResponseList.sortedWith(compareBy<ItemsItem>({ it.dateTaken })).reversed()
                     setView(PhotoResponseList)
                 }
 
