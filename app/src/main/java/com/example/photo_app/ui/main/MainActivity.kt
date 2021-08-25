@@ -53,7 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
             }
             @RequiresApi(Build.VERSION_CODES.N)
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                filterPhotograph(p0.toString())
+                filterTag(p0.toString())
             }
         })
     }
@@ -72,15 +72,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainNavigator>(), PhotoAd
             }
         })
     }
-    //SearchAutorName
-    private fun filterPhotograph(skey: String) {
-        val filterList = ArrayList<ItemsItem>()
-        for (entity in PhotoResponseList){
-            if (entity.author!!.contains(skey,true)){
-                filterList.add(entity)
+    //EnterTagsName
+    private fun filterTag(skey: String) {
+        PhotoResponseList.clear()
+        photoViewModel!!.getTagPhoto(skey).observe(this, { response ->
+            if (response?.data != null) {
+                val photoResponse = response.data as PhotoResponse
+                if (photoResponse.items!!.size>0){
+                    PhotoResponseList.addAll(photoResponse.items as List<ItemsItem>)
+                    setView(PhotoResponseList)
+                }
+
+            } else {
+                showToast(response.throwable?.message!!)
             }
-        }
-        photoAdapter!!.setCourseAdapter(filterList)
+        })
     }
     //SetAdapterValue
     private fun setView(photoResponseItem: List<ItemsItem>) {

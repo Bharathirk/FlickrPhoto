@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PhotoViewModel @Inject constructor() : BaseViewModel<MainNavigator>() {
-    //CallApiFunction
+    //CallDefaultApiFunction
     fun getPhoto(): MutableLiveData<AppResponse<Any>> {
         val responseBody = MutableLiveData<AppResponse<Any>>()
     viewModelScope.launch(Dispatchers.IO){
@@ -20,7 +20,16 @@ class PhotoViewModel @Inject constructor() : BaseViewModel<MainNavigator>() {
 
         return responseBody
     }
+    //CallTagApiFunction
+    fun getTagPhoto(tag:String): MutableLiveData<AppResponse<Any>> {
+        val responseBody = MutableLiveData<AppResponse<Any>>()
+        viewModelScope.launch(Dispatchers.IO){
+            val response = api.getPhotoList("json",tag,"1")
+            responseBody.postValue(AppResponse.success(response))
+        }
 
+        return responseBody
+    }
 
 
 }
